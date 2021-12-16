@@ -1,0 +1,24 @@
+{
+  "name": "itori-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurilako/itori-backend.git"
+  },
+  "author": "Konsta Laurila",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurilako/itori-backend/issues"
+  },
+  "homepage": "https://github.com/laurilako/itori-backend#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
