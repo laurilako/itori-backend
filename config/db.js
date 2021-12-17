@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config({ path: '../.env'})
 
+// Yhdistetään databaseen ja ilmoitetaan tilanne siitä terminaaliin.
 const connectDB = async () => {
     try {
         const con = await mongoose.connect(process.env.MONGO_URI, {

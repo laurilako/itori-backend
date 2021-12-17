@@ -50,6 +50,11 @@ userSchema.set('toJSON', {
     }
 })
 
+// Kirjautumista varten metodi, jossa verrataan kryptattya databasesta löytyvää salasanaa
+// Syötettyyn salasanaan.
+userSchema.methods.matchPassword = async function (enteredPw) {
+    return await bcrypt.compare(enteredPw, this.password)
+}
 
 const User = mongoose.model('User', userSchema);
 
