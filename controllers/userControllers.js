@@ -34,7 +34,6 @@ const registerUser = asyncHandler(async (req, res) => {
 // Kirjautumista varten kontrolleri
 const loginUser = asyncHandler(async (req, res) => {
     const { name, password } = req.body;
-
     const user = await User.findOne({ name });
 
     if (user && (await user.matchPassword(password))) {

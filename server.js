@@ -26,7 +26,7 @@ app.get('/api/listings/:id', (req, res) => {
     res.send(listing);
 })
 
-app.use('/api/users', userRoutes);
+app.use('/api/users/', userRoutes);
 
 // Virheenkäsittelijä middlewaret käyttöön lopuksi
 app.use(notFound);
