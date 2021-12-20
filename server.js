@@ -4,6 +4,7 @@ const listings = require('./data/listings');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
+const listingRoutes = require('./routes/listingRoutes');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 dotenv.config();
 
@@ -17,15 +18,7 @@ app.get('/', (req, res) => {
     res.send("api runs..");
 });
 
-app.get('/api/listings/', (req, res) => {
-    res.json(listings);
-})
-
-app.get('/api/listings/:id', (req, res) => {
-    const listing = listings.find((n) => n._id === req.params.id);
-    res.send(listing);
-})
-
+app.use("/api/listings/", listingRoutes);
 app.use('/api/users/', userRoutes);
 
 // Virheenkäsittelijä middlewaret käyttöön lopuksi
