@@ -2,6 +2,17 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const { genToken } = require('../utils/genToken');
 
+
+const getAll = asyncHandler(async (req, res, next) => {
+    try {
+        const users = await User.find({}).populate('listings', { title: 1 })
+        res.json(users.map(u => u.toJSON()))
+    } catch (error) {
+       next(error);
+    }
+})
+
+
 // Käyttäjän rekisteröintiä varten kontrolleri
 const registerUser = asyncHandler(async (req, res) => {
     const { name, password } = req.body;
@@ -50,4 +61,4 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { registerUser, loginUser }
+module.exports = { getAll, registerUser, loginUser }
