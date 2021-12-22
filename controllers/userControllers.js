@@ -35,6 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user._id,
             name: user.name,
             isAdmin: user.isAdmin,
+            listings: user.listings
         })
     } else {
         res.status(400)
