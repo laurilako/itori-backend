@@ -2,6 +2,18 @@ const asyncHandler = require('express-async-handler');
 const Listing = require('../models/listingModel');
 const User = require('../models/userModel');
 
+
+const removeListing = asyncHandler(async (req, res) => {
+    const listingToDelete = await Listing.findById(req.params.id)
+    
+    if(listingToDelete){
+        await listingToDelete.remove()
+        res.status(204).end()
+    } else {
+        res.status(401).end()
+    } 
+})
+
 const getListings = asyncHandler(async (req, res) => {
     const listings = await Listing.find({}).populate('user', { name: 1})
     res.json(listings)
@@ -60,4 +72,4 @@ const newListing = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { getListings, newListing }
+module.exports = { getListings, newListing, removeListing }

@@ -2,6 +2,20 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const { genToken } = require('../utils/genToken');
 
+const getUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+    if(user){
+        res.status(201).json({
+            _id: user._id,
+            name: user.name,
+            isAdmin: user.isAdmin,
+            listings: user.listings
+        })
+    } else {
+        res.status(400)
+        throw new Error("User not found!");
+    }
+})
 
 const getAll = asyncHandler(async (req, res, next) => {
     try {
@@ -62,4 +76,4 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { getAll, registerUser, loginUser }
+module.exports = { getAll, registerUser, loginUser, getUser }
