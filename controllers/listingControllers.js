@@ -14,9 +14,12 @@ const updateListing = asyncHandler(async (req, res) => {
 
 const removeListing = asyncHandler(async (req, res) => {
     const listingToDelete = await Listing.findById(req.params.id)
-    
+    const user = await User.findById(req.body.data);
+
     if(listingToDelete){
+        user.listings.pull(req.params.id)
         await listingToDelete.remove()
+        await user.save()
         res.status(204).end()
     } else {
         res.status(401).end()
@@ -25,7 +28,7 @@ const removeListing = asyncHandler(async (req, res) => {
 
 const getListings = asyncHandler(async (req, res) => {
     const listings = await Listing.find({}).populate('user', { name: 1})
-    res.json(listings)
+    res.json(listings.map(o => o.toJSON()))
 })
 
 const newListing = asyncHandler(async (req, res) => {
