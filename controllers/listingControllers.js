@@ -50,8 +50,7 @@ const newListing = asyncHandler(async (req, res) => {
     // const { title, content, pic, userId } = req.body;
     const body  = req.body;
     const user = await User.findById(body.userId);
-    console.log(body);
-
+    
     // Tarkistetaan löytyyko samannimistä postausta...
     const title = body.title;
     const listingExists = await Listing.findOne({ title })
