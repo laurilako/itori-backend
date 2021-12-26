@@ -2,6 +2,15 @@ const asyncHandler = require('express-async-handler');
 const Listing = require('../models/listingModel');
 const User = require('../models/userModel');
 
+const updateListing = asyncHandler(async (req, res) => {
+    const body = req.body
+    const nListing = {
+        title: body.title,
+        content: body.content
+    }
+    const updatedListing = await Listing.findByIdAndUpdate(req.params.id, nListing)
+    res.json(updatedListing);
+})
 
 const removeListing = asyncHandler(async (req, res) => {
     const listingToDelete = await Listing.findById(req.params.id)
@@ -72,4 +81,4 @@ const newListing = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { getListings, newListing, removeListing }
+module.exports = { getListings, newListing, removeListing, updateListing }
