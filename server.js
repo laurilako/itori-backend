@@ -8,10 +8,9 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 dotenv.config();
 
 const app = express();
-app.use(express.static('build'))
 app.use(express.json());
 app.use(cors());
-
+app.use(express.static('build'))
 connectDB();
 
 app.use("/api/listings/", listingRoutes);

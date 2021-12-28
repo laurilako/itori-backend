@@ -12,7 +12,7 @@ const getUser = asyncHandler(async (req, res) => {
             listings: user.listings
         })
     } else {
-        res.status(400)
+        res.status(404)
         throw new Error("User not found!");
     }
 })

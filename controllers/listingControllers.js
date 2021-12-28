@@ -2,6 +2,16 @@ const asyncHandler = require('express-async-handler');
 const Listing = require('../models/listingModel');
 const User = require('../models/userModel');
 
+const getSingleListing = asyncHandler(async (req, res) => {
+    const listing = await Listing.findById(req.params.id)
+    if(listing){
+        res.status(201).json(listing)
+    } else {
+        res.status(404)
+        throw new Error("Listing not found!");
+    }
+})
+
 const updateListing = asyncHandler(async (req, res) => {
     const body = req.body
     const nListing = {
@@ -83,4 +93,4 @@ const newListing = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { getListings, newListing, removeListing, updateListing }
+module.exports = { getListings, newListing, removeListing, updateListing, getSingleListing }
